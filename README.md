@@ -6,7 +6,7 @@
 
 2. Clone the repository
 
-    `git clone https://github.com/michaelgold/chalktalk-presentations`
+    `git clone https://github.com/michaelgold/chalktalk-presentations.git`
 
 3. Install the dependencies
 
