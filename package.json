@@ -1,0 +1,27 @@
+{
+  "name": "chalktalk-presentations",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install": "npm run install-app && npm run install-admin",
+    "build": "cd admin && npm run build && cp -r build/* ../middleware/public/",
+    "start": "cd admin && npm run start= && cd ../middleware && npm run start=",
+    "test": "npm run build && npm run test-local",
+    "install-app": "cd middleware && npm install",
+    "install-admin": "cd admin && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelgold/chalktalk-presentations"
+  },
+  "keywords": [
+    "chalktalk"
+  ],
+  "author": "@michaelgold",
+  "license": "MIT",
+  "bugs": {
+    "url": "git+https://github.com/michaelgold/chalktalk-presentations/issues"
+  },
+  "homepage": "git+https://github.com/michaelgold/chalktalk-presentations#readme"
+}
