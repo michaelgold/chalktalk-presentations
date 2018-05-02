@@ -8,7 +8,8 @@ import { PresentationsList, PresentationsEdit, PresentationsCreate } from './ser
 //import { PostList } from './posts';
 import { Delete } from 'admin-on-rest/lib/mui';
 import {SlidesCreate} from "./services/slides";
-
+import Dashboard from './Dashboard';
+import LoginPage from './LoginPage';
 
 const authClientOptions = {
     storageKey: 'feathers-jwt',
@@ -26,25 +27,27 @@ const options = { id: '_id' };
 
 const App = () => (
     <Admin
+        loginPage={LoginPage}
+        dashboard={Dashboard}
         title="Chalktalk Presentations"
         authClient={authClient(feathersClient, authClientOptions)}
         restClient={restClient(feathersClient, options)}
     >
         {permissions => [
-            permissions === 'admin' ?
-                <Resource name="users"
-                          list={UsersList}
-                          edit={UsersEdit}
-                          create={UsersCreate}
-                          remove={Delete}
-                /> : null,
-                <Resource name="presentations"
-                          list={PresentationsList}
-                          edit={PresentationsEdit}
-                          create={PresentationsCreate}
-                          remove={Delete}
-                />,
-                <Resource name="slides" create={SlidesCreate} />
+          permissions === 'admin' ?
+          <Resource name="users"
+                      list={UsersList}
+                      edit={UsersEdit}
+                      create={UsersCreate}
+                      remove={Delete}
+          /> : null,
+          <Resource name="presentations"
+                    list={PresentationsList}
+                    edit={PresentationsEdit}
+                    create={PresentationsCreate}
+                    remove={Delete}
+          />,
+          <Resource name="slides" create={SlidesCreate} />
         ]}
 
     </Admin>
