@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import {
   List,
@@ -11,6 +12,12 @@ import {
   TextInput,
   SimpleForm
 } from "admin-on-rest";
+=======
+import React from 'react';
+import { List, Edit, Create, Datagrid, TextField, EditButton,
+    DisabledInput, TextInput, SimpleForm } from 'admin-on-rest';
+import TextFields from 'material-ui/TextField';
+>>>>>>> 2681619847f7b5e28eee2ce58d65131b85a2913f
 
 export const UsersList = props => (
   <List {...props}>
@@ -36,6 +43,7 @@ export const UsersEdit = props => (
         />
 
       <TextInput label="Password" source="password" type="password"/>
+      <label>Note: Always retype your password when editing!</label>
     </SimpleForm>
   </Edit>
 );

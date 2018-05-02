@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import {
   List,
@@ -122,4 +123,23 @@ export const SlidesList = props => (
   <List title="All slides" {...props}>
     <SlideGrid />
   </List>
+=======
+import React from 'react';
+import { List, Edit, Create, Datagrid, TextField, EditButton,
+    DisabledInput, TextInput, SimpleForm, ReferenceInput, NumberInput, SelectInput} from 'admin-on-rest';
+
+
+export const SlidesCreate = (props) => (
+    <Create {...props}>
+        <SimpleForm>
+            <ReferenceInput label="Select Presentation" source="presentation_id" defaulValue={props.presentation_id} reference="presentations"  allowEmpty>
+                <SelectInput optionText="title" />
+            </ReferenceInput>
+            <NumberInput label="Order of slide" source="order" />
+            <TextInput label="Title of slide" source="title" />
+            <TextInput label="Slide Caption" source="caption" />
+            <TextInput label="Image" source="image" />
+        </SimpleForm>
+    </Create>
+>>>>>>> 2681619847f7b5e28eee2ce58d65131b85a2913f
 );
