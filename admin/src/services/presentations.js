@@ -47,7 +47,7 @@ export const PresentationsEdit = (props) => (
                     <NumberField label="Order" source="order" />
                     <TextField label="Slide Title" source="title" />
                     <TextField label="Slide Caption" source="caption" />
-                    <ImageField source="image.url" title="image.title" />
+                    <ImageField source="image" type="url"/>
                     <EditButton />
                 </Datagrid>
             </ReferenceManyField>
