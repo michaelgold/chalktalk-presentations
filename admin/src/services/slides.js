@@ -43,12 +43,12 @@ export const SlidesCreate = props => (
       <NumberInput label="Order" source="order" />
       <TextInput label="Title" source="title" />
       <TextInput label="Slide Caption" source="caption" />
-      <ImageInput source="image" label="Backgroud image" accept="image/*">
-        <ImageField source="src" title="title" />
-      </ImageInput>
+      <TextInput source="image" type="url" label="Backgroud image" />
     </SimpleForm>
   </Create>
 );
+
+const img = "img";
 
 export const SlidesEdit = props => (
   <Edit {...props}>
@@ -65,9 +65,8 @@ export const SlidesEdit = props => (
       <NumberInput label="Order" source="order" />
       <LongTextInput label="Title" source="title" />
       <LongTextInput label="Slide Caption" source="caption" />
-      <ImageInput source="image" label="Backgroud image" accept="image/*">
-        <ImageField source="src" title="title" />
-      </ImageInput>
+      <TextInput source="image" label="Backgroud image" type="url" />
+      <ImageField source="image" />
     </SimpleForm>
   </Edit>
 );
@@ -93,13 +92,9 @@ const SlideGrid = ({ ids, data, basePath }) => (
             />
           }
         >
-          <img
-            src={<ImageField record={data[id]} source="image" allowEmpty />}
-            alt=""
-          />
+          <ImageField record={data[id]} source="image"  />
         </CardMedia>
         <CardText>
-          about&nbsp;
           <ReferenceField
             label="Presentation"
             resource="presentations"
