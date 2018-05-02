@@ -17,6 +17,13 @@ const restrict = [
   })
 ];
 
+const userRestriction = [
+  authenticate('jwt'),
+  restrictToRoles({
+    roles: 'admin, user'
+  })
+];
+
 const adminRestriction = [
   authenticate('jwt'),
   restrictToRoles({
@@ -27,8 +34,8 @@ const adminRestriction = [
 module.exports = {
   before: {
     all: [],
-    find: [ ...adminRestriction ],
-    get: [ ...adminRestriction ],
+    find: [ ...userRestriction ],
+    get: [ ...userRestriction ],
     create: [ ...adminRestriction, hashPassword() ],
     update: [ ...adminRestriction, hashPassword() ],
     patch: [ ...adminRestriction, hashPassword()  ],

@@ -1,2 +1,4 @@
 {"email":"goldmichael@gmail.com","roles":"admin","id":"8a1NY8vnDUko3PbN","name":"Michael Gold","password":"$2a$12$HOWiVsLyodGvo6durl/A0uLxmHtuzAbrSsJ5kJuVXKT31A2xZq6aC","_id":"8a1NY8vnDUko3PbN"}
+{"name":"Sayem","email":"shahs7@farmingdale.edu","roles":"admin","id":"Da7XN7jHvCGed7ue","password":"$2a$12$oDj/RnvEjhUd.C0WqeHW1eAiZFTQKjUo/lWLZ43s4VvBdVuKFG92u","_id":"Da7XN7jHvCGed7ue"}
+{"name":"Paola Franco","email":"franco@farmingdale.edu","roles":"user","id":"nmd7Z1yCcHyvcBz2","password":"$2a$12$5YPun4SpUMXbvkp/6UnM9.Wcnt4JQIWE6EUm8d8HBPIla6Tt8N0Z.","_id":"nmd7Z1yCcHyvcBz2"}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
