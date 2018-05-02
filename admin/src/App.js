@@ -12,6 +12,9 @@ import {
 import { Delete } from "admin-on-rest/lib/mui";
 import { SlidesList, SlidesCreate, SlidesEdit } from "./services/slides";
 import addUploadFeature from './addUploadFeature';
+import Dashboard from './Dashboard';
+import LoginPage from './LoginPage';
+
 
 
 const authClientOptions = {
@@ -30,6 +33,8 @@ const options = { id: "_id" };
 
 const App = () => (
   <Admin
+    loginPage={LoginPage}
+    dashboard={Dashboard}
     title="Chalktalk Presentations"
     authClient={authClient(feathersClient, authClientOptions)}
     restClient={addUploadFeature(restClient(feathersClient, options))}

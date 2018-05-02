@@ -29,13 +29,14 @@ export const UsersEdit = props => (
       <DisabledInput source="_id" />
       <TextInput label="Name" source="name" />
       <TextInput label="E-mail" source="email" type="email" />
-        <RadioButtonGroupInput
-          label="Role"
-          source="roles"
-          choices={[{ id: "user", name: "User" }, { id: "admin", name: "Admin" }]}
-        />
+      <RadioButtonGroupInput
+        label="Role"
+        source="roles"
+        choices={[{ id: "user", name: "User" }, { id: "admin", name: "Admin" }]}
+      />
 
-      <TextInput label="Password" source="password" type="password"/>
+      <TextInput label="Password" source="password" type="password" />
+      <label>Note: Always retype your password when editing!</label>
     </SimpleForm>
   </Edit>
 );
@@ -50,7 +51,7 @@ export const UsersCreate = props => (
         source="roles"
         choices={[{ id: "user", name: "User" }, { id: "admin", name: "Admin" }]}
       />
-    <TextInput label="Password" source="password" type="password"/>
+      <TextInput label="Password" source="password" type="password" />
     </SimpleForm>
   </Create>
 );

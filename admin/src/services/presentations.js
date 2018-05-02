@@ -8,6 +8,7 @@ import decodeJwt from 'jwt-decode';
 let UserID = (localStorage.getItem('feathers-jwt') == null) ? "" : decodeJwt(localStorage.getItem('feathers-jwt')).id;
 
 export const PresentationsList = (props) => (
+    <label>You can either create new presentations or edit existing ones.</label>,
     <List {...props}>
         <Datagrid>
             <TextField label= "_id" source="_id" />
@@ -38,6 +39,7 @@ const CreateSlideButton = (props) => (
 export const PresentationsEdit = (props) => (
     <Edit {...props} title="Edit Presentation">
         <SimpleForm>
+            <label>You can change the owner of the presentation, change the title, edit slides, or create new ones.</label>
             <ReferenceInput label="User" source="userID" reference="users" >
                 <SelectInput optionText="name" />
             </ReferenceInput>
@@ -47,7 +49,7 @@ export const PresentationsEdit = (props) => (
                     <NumberField label="Order" source="order" />
                     <TextField label="Slide Title" source="title" />
                     <TextField label="Slide Caption" source="caption" />
-                    <ImageField source="image.url" title="image.title" />
+                    <ImageField source="image" type="url"/>
                     <EditButton />
                 </Datagrid>
             </ReferenceManyField>
@@ -61,10 +63,11 @@ export const PresentationsEdit = (props) => (
 export const PresentationsCreate = (props) => (
     <Create {...props}>
          <SimpleForm>
+            <label>Select a User and enter a title for your presentation.</label>
             <ReferenceInput label="User"  source="userID" reference="users"  defaultValue={ UserID } allowEmpty>
                 <SelectInput optionText="name" />
             </ReferenceInput>
-            <TextInput label="Title" source="title" />
+            <TextInput label="Title" source="title"/>
         </SimpleForm>
    </Create>
 );
