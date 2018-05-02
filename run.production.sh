@@ -2,7 +2,7 @@
 pm2 stop all
 
 cd /home/mg/chalktalk-presentations/chalktalk
-pm2 start "./run.linux" --name "chalktalk-server"
+pm2 start "./run.production.sh" --name "chalktalk-server"
 
 cd /home/mg/chalktalk-presentations/admin
 pm2 start "/usr/bin/npm" --name "chalktalkp admin" -- start
