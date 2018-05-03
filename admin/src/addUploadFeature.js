@@ -17,7 +17,7 @@ const convertFileToBase64 = file => new Promise((resolve, reject) => {
  * the `picture` sent property, with `src` and `title` attributes.
  */
 const addUploadCapabilities = requestHandler => (type, resource, params) => {
-    if (type === 'UPDATE' && resource === 'slides') {
+    if ((type === 'UPDATE' || type === 'CREATE') && resource === 'images') {
         if (params.data.pictures && params.data.pictures.length) {
             // only freshly dropped pictures are instance of File
             const formerPictures = params.data.pictures.filter(p => !(p.rawFile instanceof File));

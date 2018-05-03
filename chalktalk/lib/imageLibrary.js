@@ -38,7 +38,13 @@ function imageLibrary_load() {
 	       str = str.substring(i + 1, str.length);
 	    }
             var image = new Image();
-            image.src = "images/" + str;
+            var pattern = new RegExp('^data');
+
+            if (pattern.test(str)) {
+              image.src = str;
+            } else {
+              image.src = "images/" + str;
+            }
             imageLibrary_images.push(image);
          }
       }
@@ -306,4 +312,3 @@ function imageLibrary_update() {
          speakerNotes = undefined;
    }
 }
-

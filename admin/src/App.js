@@ -11,11 +11,10 @@ import {
 //import { PostList } from './posts';
 import { Delete } from "admin-on-rest/lib/mui";
 import { SlidesList, SlidesCreate, SlidesEdit } from "./services/slides";
-import addUploadFeature from './addUploadFeature';
-import Dashboard from './Dashboard';
-import LoginPage from './LoginPage';
-
-
+import { ImagesList, ImagesCreate, ImagesEdit } from "./services/images";
+import addUploadFeature from "./addUploadFeature";
+import Dashboard from "./Dashboard";
+import LoginPage from "./LoginPage";
 
 const authClientOptions = {
   storageKey: "feathers-jwt",
@@ -23,7 +22,10 @@ const authClientOptions = {
 };
 
 // to rename id field for *all* resources use this syntax:
-const options = { id: "_id" };
+const options = {
+  id: "_id",
+  usePatch: true
+};
 
 // to rename id field(s) for specific resources use this syntax:
 // const options = {'my-resource': {id: '_id'}};
@@ -54,7 +56,20 @@ const App = () => (
         create={PresentationsCreate}
         remove={Delete}
       />,
-    <Resource name="slides" create={SlidesCreate} edit={SlidesEdit} list={SlidesList} />
+      <Resource
+        name="slides"
+        create={SlidesCreate}
+        edit={SlidesEdit}
+        list={SlidesList}
+        remove={Delete}
+      />,
+      <Resource
+        name="images"
+        create={ImagesCreate}
+        edit={ImagesEdit}
+        list={ImagesList}
+        remove={Delete}
+      />
     ]}
   </Admin>
 );

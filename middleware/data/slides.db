@@ -1,2 +1,5 @@
-{"presentation_id":"QxYqDaigNyfBZjmX","order":1,"title":"Problem","caption":"Educational presentations can be innefective","id":"PvO0ZQggkVDIQPqF","Image":[{"rawFile":{"preview":"blob:http://localhost:3000/fc45ca62-e6c8-4e97-9bd5-03b643245fb2"},"src":"blob:http://localhost:3000/fc45ca62-e6c8-4e97-9bd5-03b643245fb2","title":"shopping.jpg"}],"_id":"PvO0ZQggkVDIQPqF"}
-{"presentation_id":"QxYqDaigNyfBZjmX","order":2,"title":"Solution","caption":"Chalktalk","id":"lLbAP9jSpfzNFUd8","Image":[{"rawFile":{"preview":"blob:http://localhost:3000/c5d10c9f-d05e-49e0-81a2-21c5f507cfd7"},"src":"blob:http://localhost:3000/c5d10c9f-d05e-49e0-81a2-21c5f507cfd7","title":"ateam.jpg"}],"image":[{"rawFile":{"preview":"blob:http://localhost:3000/093a94c6-90a9-4e95-85ba-b7cb4b148230"},"src":"blob:http://localhost:3000/093a94c6-90a9-4e95-85ba-b7cb4b148230","title":"ateam.jpg"}],"_id":"lLbAP9jSpfzNFUd8"}
+{"presentation_id":"QxYqDaigNyfBZjmX","order":2,"title":"Another slide","_id":"14KVmv0qua5ZlXNR","image_id":"OX891jad5L5GZhs5"}
+{"$$deleted":true,"_id":"uJIA4guOXyaak2dN"}
+{"presentation_id":"QxYqDaigNyfBZjmX","order":1,"title":"A slide with no image","_id":"TyzIMlyUmxgf0GHy"}
+{"presentation_id":"QxYqDaigNyfBZjmX","order":3,"title":"A slide with an image","image_id":"Qciq1DoADSLe7XWZ","_id":"pJf7Cjkx7On6N1NA"}
+{"presentation_id":"QxYqDaigNyfBZjmX","order":3,"title":"A slide with an image","image_id":"Qciq1DoADSLe7XWZ","_id":"pJf7Cjkx7On6N1NA"}

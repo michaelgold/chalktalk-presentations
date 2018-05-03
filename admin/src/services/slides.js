@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  AutocompleteInput,
   List,
   Edit,
   CommentGrid,
@@ -7,6 +8,7 @@ import {
   Datagrid,
   TextField,
   EditButton,
+  Filter,
   LongTextInput,
   DisabledInput,
   ImageField,
@@ -34,7 +36,6 @@ export const SlidesCreate = props => (
       <ReferenceInput
         label="Presentation"
         source="presentation_id"
-        defaulValue={props.presentation_id}
         reference="presentations"
         allowEmpty
       >
@@ -43,7 +44,17 @@ export const SlidesCreate = props => (
       <NumberInput label="Order" source="order" />
       <TextInput label="Title" source="title" />
       <TextInput label="Slide Caption" source="caption" />
-      <TextInput source="image" type="url" label="Backgroud image" />
+      <ReferenceInput
+        label="Background Image"
+        source="image_id"
+        reference="images"
+        allowEmpty
+      >
+        <AutocompleteInput optionText="title" />
+      </ReferenceInput>
+      <ReferenceField source="image_id" reference="images" allowEmpty>
+        <ImageField source="pictures" src="src" title="title" />
+      </ReferenceField>
     </SimpleForm>
   </Create>
 );
@@ -65,34 +76,73 @@ export const SlidesEdit = props => (
       <NumberInput label="Order" source="order" />
       <LongTextInput label="Title" source="title" />
       <LongTextInput label="Slide Caption" source="caption" />
-      <TextInput source="image" label="Backgroud image" type="url" />
-      <ImageField source="image" />
+      <ReferenceInput
+        label="Background Image"
+        source="image_id"
+        reference="images"
+        allowEmpty
+      >
+        <AutocompleteInput optionText="title" />
+      </ReferenceInput>
+      <ReferenceField source="image_id" reference="images" allowEmpty>
+        <ImageField source="pictures" src="src" title="title" />
+      </ReferenceField>
     </SimpleForm>
   </Edit>
 );
 
+const SlidesFilter = (props) => (
+    <Filter {...props}>
+      <ReferenceInput
+        label="Select presentation"
+        source="presentation_id"
+        reference="presentations"
+        alwaysOn
+      >
+        <AutocompleteInput optionText="title" />
+      </ReferenceInput>
+    </Filter>
+);
+
+
+
 const cardStyle = {
-  width: 300,
-  margin: ".5em",
+  width: "70%",
+  margin: "1em",
   display: "inline-block",
   verticalAlign: "top"
 };
 
 const SlideGrid = ({ ids, data, basePath }) => (
-  <div style={{ margin: "2em", paddingTop: "3em" }}>
+  <div style={{ margin: "3em", paddingTop: "3em" }}>
     {ids.map(id => (
       <Card key={id} style={cardStyle}>
         <CardMedia
+          style={{ minHeight: 150 }}
           overlay={
             <CardTitle
-
-          style= {{ height: 70}}
               title={<TextField record={data[id]} source="title" allowEmpty />}
-              subtitle={<TextField record={data[id]} source="caption" allowEmpty />}
+              subtitle={
+                <TextField record={data[id]} source="caption" allowEmpty />
+              }
             />
           }
         >
-          <ImageField record={data[id]} source="image"  />
+          <ReferenceField
+            record={data[id]}
+            source="image_id"
+            reference="images"
+            basePath={basePath}
+            allowEmpty
+          >
+            <ImageField
+              record={data[id]}
+              source="pictures"
+              src="src"
+              title="title"
+              allowEmpty
+            />
+          </ReferenceField>
         </CardMedia>
         <CardText>
           <ReferenceField
@@ -119,7 +169,7 @@ SlideGrid.defaultProps = {
 };
 
 export const SlidesList = props => (
-  <List title="All slides" {...props}>
+    <List title="Slides" {...props}  filters={<SlidesFilter />} sort={{ field: 'order', order: 'ASC' }}>
     <SlideGrid />
   </List>
 );
