@@ -14,6 +14,7 @@ import {
   DisabledInput,
   TextInput,
   SimpleForm,
+  required,
   ReferenceField,
   ReferenceInput,
   SelectInput,
@@ -99,10 +100,10 @@ export const PresentationsEdit = props => (
         You can change the owner of the presentation, change the title, edit
         slides, or create new ones.
       </label>
-      <ReferenceInput label="User" source="userID" reference="users">
+      <ReferenceInput label="User" source="userID" reference="users" validate={required} >
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <TextInput label="Title" source="title" />
+      <TextInput label="Title" source="title"  validate={required} />
     </SimpleForm>
   </Edit>
 );
@@ -117,10 +118,12 @@ export const PresentationsCreate = props => (
         reference="users"
         defaultValue={UserID}
         allowEmpty
+        validate={required}
       >
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <TextInput label="Title" source="title" />
+      <TextInput label="Title" source="title"         validate={required}
+ />
     </SimpleForm>
   </Create>
 );

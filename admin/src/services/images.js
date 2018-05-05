@@ -11,6 +11,7 @@ import {
   ImageField,
   ImageInput,
   TextInput,
+  required,
   SimpleForm,
   ReferenceField,
   ReferenceInput,
@@ -30,8 +31,10 @@ import {
 export const ImagesCreate = props => (
   <Create {...props}>
     <SimpleForm>
-      <TextInput label="Title" source="title" />
-      <ImageInput source="pictures" label="Related pictures" accept="image/*">
+      <TextInput label="Title" source="title" validate={required}
+ />
+      <ImageInput source="pictures" label="Related pictures"         validate={required}
+ accept="image/*">
         <ImageField source="src" title="title" />
       </ImageInput>
     </SimpleForm>

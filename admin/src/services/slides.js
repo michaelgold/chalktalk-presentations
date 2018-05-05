@@ -15,6 +15,7 @@ import {
   ImageInput,
   TextInput,
   SimpleForm,
+  required,
   ReferenceField,
   ReferenceInput,
   NumberInput,
@@ -40,6 +41,7 @@ export const SlidesCreate = props => (
         source="presentation_id"
         reference="presentations"
         allowEmpty
+        validate={required}
       >
         <SelectInput optionText="title" />
       </ReferenceInput>
@@ -64,12 +66,13 @@ export const SlidesCreate = props => (
 export const SlidesEdit = props => (
   <Edit {...props}>
     <SimpleForm>
-      <DisabledInput source="_id" />
       <ReferenceInput
         label="Presentation"
         source="presentation_id"
         reference="presentations"
         allowEmpty
+
+        validate={required}
       >
         <SelectInput optionText="title" />
       </ReferenceInput>

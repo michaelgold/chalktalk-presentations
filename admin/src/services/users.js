@@ -8,6 +8,7 @@ import {
   EditButton,
   DisabledInput,
   RadioButtonGroupInput,
+  required,
   TextInput,
   SimpleForm
 } from "admin-on-rest";
@@ -24,18 +25,27 @@ export const UsersList = props => (
 );
 
 export const UsersEdit = props => (
-  <Edit {...props}>
+  <Edit {...props} title="Edit User">
     <SimpleForm>
-      <DisabledInput source="_id" />
-      <TextInput label="Name" source="name" />
-      <TextInput label="E-mail" source="email" type="email" />
+      <TextInput label="Name" source="name" validate={required} />
+      <TextInput
+        label="E-mail"
+        source="email"
+        type="email"
+        validate={required}
+      />
       <RadioButtonGroupInput
         label="Role"
         source="roles"
         choices={[{ id: "user", name: "User" }, { id: "admin", name: "Admin" }]}
       />
 
-      <TextInput label="Password" source="password" type="password" />
+      <TextInput
+        label="Password"
+        source="password"
+        type="password"
+        validate={required}
+      />
       <label>Note: Always retype your password when editing!</label>
     </SimpleForm>
   </Edit>
@@ -44,14 +54,25 @@ export const UsersEdit = props => (
 export const UsersCreate = props => (
   <Create {...props}>
     <SimpleForm>
-      <TextInput label="Name" source="name" />
-      <TextInput label="E-mail" source="email" type="email" />
+      <TextInput label="Name" source="name" validate={required} />
+      <TextInput
+        label="E-mail"
+        source="email"
+        type="email"
+        validate={required}
+      />
       <RadioButtonGroupInput
         label="Role"
+        validate={required}
         source="roles"
         choices={[{ id: "user", name: "User" }, { id: "admin", name: "Admin" }]}
       />
-      <TextInput label="Password" source="password" type="password" />
+      <TextInput
+        label="Password"
+        source="password"
+        type="password"
+        validate={required}
+      />
     </SimpleForm>
   </Create>
 );
