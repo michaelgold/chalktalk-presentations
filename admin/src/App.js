@@ -15,6 +15,10 @@ import { ImagesList, ImagesCreate, ImagesEdit } from "./services/images";
 import addUploadFeature from "./addUploadFeature";
 import Dashboard from "./Dashboard";
 import LoginPage from "./LoginPage";
+import UsersIcon from 'material-ui/svg-icons/social/group';
+import ImagesIcon from 'material-ui/svg-icons/image/collections';
+import SlidesIcon from "material-ui/svg-icons/action/view-carousel";
+import PresentationsIcon from 'material-ui/svg-icons/image/slideshow';
 
 const authClientOptions = {
   storageKey: "feathers-jwt",
@@ -44,6 +48,7 @@ const App = () => (
     {permissions => [
       <Resource
         name="users"
+        icon = { UsersIcon }
         list={permissions === "admin" ? UsersList : null}
         edit={permissions === "admin" ? UsersEdit : null}
         create={permissions === "admin" ? UsersCreate : null}
@@ -51,6 +56,7 @@ const App = () => (
       />,
       <Resource
         name="presentations"
+        icon = { PresentationsIcon }
         list={PresentationsList}
         edit={PresentationsEdit}
         create={PresentationsCreate}
@@ -58,6 +64,7 @@ const App = () => (
       />,
       <Resource
         name="slides"
+        icon = { SlidesIcon }
         create={SlidesCreate}
         edit={SlidesEdit}
         list={SlidesList}
@@ -65,6 +72,7 @@ const App = () => (
       />,
       <Resource
         name="images"
+        icon = { ImagesIcon }
         create={ImagesCreate}
         edit={ImagesEdit}
         list={ImagesList}

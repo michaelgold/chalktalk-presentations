@@ -30,6 +30,8 @@ import {
   CardActions
 } from "material-ui/Card";
 
+import { UserID, ChalktalkButton } from "./presentations";
+
 export const SlidesCreate = props => (
   <Create {...props}>
     <SimpleForm>
@@ -58,8 +60,6 @@ export const SlidesCreate = props => (
     </SimpleForm>
   </Create>
 );
-
-const img = "img";
 
 export const SlidesEdit = props => (
   <Edit {...props}>
@@ -91,20 +91,18 @@ export const SlidesEdit = props => (
   </Edit>
 );
 
-const SlidesFilter = (props) => (
-    <Filter {...props}>
-      <ReferenceInput
-        label="Select presentation"
-        source="presentation_id"
-        reference="presentations"
-        alwaysOn
-      >
-        <AutocompleteInput optionText="title" />
-      </ReferenceInput>
-    </Filter>
+const SlidesFilter = props => (
+  <Filter {...props}>
+    <ReferenceInput
+      label="Select presentation"
+      source="presentation_id"
+      reference="presentations"
+      alwaysOn
+    >
+      <SelectInput optionText="title" />
+    </ReferenceInput>
+  </Filter>
 );
-
-
 
 const cardStyle = {
   width: "70%",
@@ -158,6 +156,7 @@ const SlideGrid = ({ ids, data, basePath }) => (
         </CardText>
         <CardActions style={{ textAlign: "right" }}>
           <EditButton resource="slides" basePath={basePath} record={data[id]} />
+          <ChalktalkButton source="presentation_id" record={data[id]}  />
         </CardActions>
       </Card>
     ))}
@@ -169,7 +168,12 @@ SlideGrid.defaultProps = {
 };
 
 export const SlidesList = props => (
-    <List title="Slides" {...props}  filters={<SlidesFilter />} sort={{ field: 'order', order: 'ASC' }}>
+  <List
+    title="Slides"
+    {...props}
+    filters={<SlidesFilter />}
+    sort={{ field: "order", order: "ASC" }}
+  >
     <SlideGrid />
   </List>
 );
