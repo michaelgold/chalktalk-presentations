@@ -1,7 +1,7 @@
 #!/bin/sh
 pm2 stop all
 
-cp /home/mg/chalktalk-presentations/chalktalk/content/presentations.production.js /home/mg/chalktalk-presentations/chalktalk/content/presentations.js
+cp /home/mg/chalktalk-presentations/chalktalk/content/config.production.js /home/mg/chalktalk-presentations/chalktalk/content/config.js
 
 cd /home/mg/chalktalk-presentations/chalktalk
 pm2 start "./run.production.sh" --name "chalktalk-server"
