@@ -59,7 +59,7 @@ export const ImagesEdit = props => (
 
 const ImagesFilter = (props) => (
   <Filter {...props}>
-<TextInput label="Search" source="q" alwaysOn />
+<TextInput label="Search" source="$search" alwaysOn />
 
   </Filter>
 );
