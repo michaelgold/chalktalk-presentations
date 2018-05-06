@@ -1,11 +1,13 @@
 import React from "react";
 import {
+  AutocompleteInput,
   List,
   Edit,
   Create,
   Datagrid,
   TextField,
   EditButton,
+  Filter,
   LongTextInput,
   DisabledInput,
   ImageField,
@@ -29,12 +31,15 @@ import {
 } from "material-ui/Card";
 
 export const ImagesCreate = props => (
-  <Create {...props}>
+  <Create {...props} title="Upload Image">
     <SimpleForm>
-      <TextInput label="Title" source="title" validate={required}
- />
-      <ImageInput source="pictures" label="Related pictures"         validate={required}
- accept="image/*">
+      <TextInput label="Title" source="title" validate={required} />
+      <ImageInput
+        source="pictures"
+        label="Related pictures"
+        validate={required}
+        accept="image/*"
+      >
         <ImageField source="src" title="title" />
       </ImageInput>
     </SimpleForm>
@@ -52,8 +57,19 @@ export const ImagesEdit = props => (
   </Edit>
 );
 
+const ImagesFilter = (props) => (
+  <Filter {...props}>
+<TextInput label="Search" source="q" alwaysOn />
+
+  </Filter>
+);
+
 export const ImagesList = props => (
-  <List {...props}>
+  <List
+    {...props}
+    filters={<ImagesFilter />}
+    sort={{ field: "title", order: "ASC" }}
+  >
     <Datagrid>
       <TextField label="Title" source="title" />
       <ImageField source="pictures" src="src" title="title" />
