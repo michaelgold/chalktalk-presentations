@@ -33,6 +33,167 @@ import {
 
 import { UserID, ChalktalkButton } from "./presentations";
 
+import FlatButton from "material-ui/FlatButton";
+import UploadImageIcon from "material-ui/svg-icons/file/file-upload";
+
+import PropTypes from "prop-types";
+import get from "lodash.get";
+
+const styles = {
+  list: {
+    display: "flex",
+    listStyleType: "none",
+    margin: "0",
+    padding: "0"
+  }
+};
+
+export const CardImageField = ({
+  elStyle = {},
+  record,
+  source,
+  src,
+  title,
+  imageStyle
+}) => {
+  const sourceValue = get(record, source);
+  if (!sourceValue) {
+    return <div />;
+  }
+
+  if (Array.isArray(sourceValue)) {
+    const style = {
+      ...styles.list,
+      ...elStyle
+    };
+    return (
+      <ul style={style}>
+        {sourceValue.map((file, index) => {
+          const titleValue = get(file, title) || title;
+          const srcValue = get(file, src) || title;
+
+          return (
+            <li key={index}>
+                <img
+                  alt={titleValue}
+                  title={titleValue}
+                  src={srcValue}
+                  style={imageStyle}
+                />
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+
+
+
+
+  const titleValue = get(record, title) || title;
+
+  return (
+    <div style={elStyle}>
+      <img
+        title={titleValue}
+        alt={titleValue}
+        src={sourceValue}
+        style={styles.image}
+      />
+    </div>
+  );
+};
+
+CardImageField.propTypes = {
+  elStyle: PropTypes.object,
+  record: PropTypes.object,
+  source: PropTypes.string.isRequired,
+  title: PropTypes.string
+};
+
+
+
+
+export const SelectImageField = ({
+    elStyle = {},
+    record,
+    source,
+    src,
+    title,
+    imageStyle
+  }) => {
+    const sourceValue = get(record, source);
+    if (!sourceValue) {
+      return <div />;
+    }
+
+    if (Array.isArray(sourceValue)) {
+      const style = {
+        ...styles.list,
+        ...elStyle
+      };
+      return (
+        <ul style={style}>
+          {sourceValue.map((file, index) => {
+            const titleValue = get(file, title) || title;
+            const srcValue = get(file, src) || title;
+
+            return (
+              <li key={index}>
+                <div>
+                  <div>
+                  {titleValue}
+                  </div>
+                  <img
+                    alt={titleValue}
+                    title={titleValue}
+                    src={srcValue}
+                    style={imageStyle}
+                  />
+              </div>
+              </li>
+            );
+          })}
+        </ul>
+      );
+    }
+
+  const titleValue = get(record, title) || title;
+
+  return (
+    <div style={elStyle}>
+      <img
+        title={titleValue}
+        alt={titleValue}
+        src={sourceValue}
+        style={styles.image}
+      />
+    </div>
+  );
+};
+
+SelectImageField.propTypes = {
+  elStyle: PropTypes.object,
+  record: PropTypes.object,
+  source: PropTypes.string.isRequired,
+  title: PropTypes.string
+};
+
+
+
+
+
+
+const UploadImageButton = props => (
+  <FlatButton
+    {...props}
+    label="upload new image"
+    href={`/#/images/create`}
+    primary="true"
+    icon={<UploadImageIcon />}
+  />
+);
+
 export const SlidesCreate = props => (
   <Create {...props}>
     <SimpleForm>
@@ -43,25 +204,43 @@ export const SlidesCreate = props => (
         allowEmpty
         validate={required}
       >
-        <SelectInput optionText="title" />
+        <SelectInput optionText="title" validate={required} />
       </ReferenceInput>
       <NumberInput label="Order" source="order" />
       <TextInput label="Title" source="title" />
       <TextInput label="Slide Caption" source="caption" />
       <ReferenceInput
-        label="Background Image"
+        label="Select Background Image"
         source="image_id"
         reference="images"
+        sort={{ field: "title", order: "ASC" }}
         allowEmpty
       >
-        <AutocompleteInput optionText="title" />
+        <SelectInput
+          options={{
+            style: {
+              height: "110px"
+            },
+            menuStyle: {
+              marginTop: "40px"
+            }
+          }}
+          optionText={
+            <SelectImageField
+              source="pictures"
+              title="title"
+              imageStyle={{ height: "120px", paddingBottom:"10px"}}
+              src="src"
+            />
+          }
+          sort={{ field: "title", order: "ASC" }}
+        />
       </ReferenceInput>
-      <ReferenceField source="image_id" reference="images" allowEmpty>
-        <ImageField source="pictures" src="src" title="title" />
-      </ReferenceField>
+      <UploadImageButton />
     </SimpleForm>
   </Create>
 );
+const optionRenderer = props => `mike ${props}`;
 
 export const SlidesEdit = props => (
   <Edit {...props}>
@@ -71,25 +250,41 @@ export const SlidesEdit = props => (
         source="presentation_id"
         reference="presentations"
         allowEmpty
-
         validate={required}
       >
-        <SelectInput optionText="title" />
+        <SelectInput optionText="title" validate={required} />
       </ReferenceInput>
       <NumberInput label="Order" source="order" />
       <LongTextInput label="Title" source="title" />
       <LongTextInput label="Slide Caption" source="caption" />
       <ReferenceInput
-        label="Background Image"
+        label="Select Background Image"
         source="image_id"
         reference="images"
+        sort={{ field: "title", order: "ASC" }}
         allowEmpty
       >
-        <AutocompleteInput optionText="title" />
+        <SelectInput
+          options={{
+            style: {
+              height: "110px"
+            },
+            menuStyle: {
+              marginTop: "40px"
+            }
+          }}
+          optionText={
+            <SelectImageField
+              source="pictures"
+              title="title"
+              imageStyle={{ height: "120px", paddingBottom:"10px"}}
+              src="src"
+            />
+          }
+          sort={{ field: "title", order: "ASC" }}
+        />
       </ReferenceInput>
-      <ReferenceField source="image_id" reference="images" allowEmpty>
-        <ImageField source="pictures" src="src" title="title" />
-      </ReferenceField>
+      <UploadImageButton />
     </SimpleForm>
   </Edit>
 );
@@ -108,10 +303,10 @@ const SlidesFilter = props => (
 );
 
 const cardStyle = {
-  width: "70%",
   margin: "1em",
   display: "inline-block",
-  verticalAlign: "top"
+  verticalAlign: "top",
+  width: "750px"
 };
 
 const SlideGrid = ({ ids, data, basePath }) => (
@@ -136,11 +331,16 @@ const SlideGrid = ({ ids, data, basePath }) => (
             basePath={basePath}
             allowEmpty
           >
-            <ImageField
+            <CardImageField
               record={data[id]}
               source="pictures"
               src="src"
               title="title"
+              imageStyle={{
+                margin: "0",
+                padding: "0",
+                width: "750px"
+              }}
               allowEmpty
             />
           </ReferenceField>
@@ -159,7 +359,7 @@ const SlideGrid = ({ ids, data, basePath }) => (
         </CardText>
         <CardActions style={{ textAlign: "right" }}>
           <EditButton resource="slides" basePath={basePath} record={data[id]} />
-          <ChalktalkButton source="presentation_id" record={data[id]}  />
+          <ChalktalkButton source="presentation_id" record={data[id]} />
         </CardActions>
       </Card>
     ))}
