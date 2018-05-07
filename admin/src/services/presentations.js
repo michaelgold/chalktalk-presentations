@@ -77,41 +77,56 @@ const PresentationsFilter = props => (
 );
 
 export const PresentationsList = props => (
-  <div>
-    <label style={{ display: "block", padding: "1em" }}>
-      You can either create new presentations or edit existing ones.
-    </label>
-    <List {...props} filters={<PresentationsFilter />}>
-      <Datagrid>
-        <TextField label="Title" source="title" />
-        <EditButton />
+  <List
+    {...props}
+    title={
+      <div>
+        <div>Presentations</div>
+        <div style={{ fontSize: "14px" }}>You can either create new presentations or edit existing ones</div>
+      </div>
+    }
+    filters={<PresentationsFilter />}
+  >
+    <Datagrid>
+      <TextField label="Title" source="title" />
+      <EditButton />
 
-        <ViewSlidesButton source="_id" />
-        <ChalktalkButton source="_id" />
-      </Datagrid>
-    </List>
-  </div>
+      <ViewSlidesButton source="_id" />
+      <ChalktalkButton source="_id" />
+    </Datagrid>
+  </List>
 );
 
 export const PresentationsEdit = props => (
-  <Edit {...props} title="Edit Presentation">
+  <Edit {...props} title={
+    <div>
+      <div>Edit Presentation</div>
+      <div style={{ fontSize: "14px" }}>You can change the owner of the presentation or change the title</div>
+    </div>
+  }>
     <SimpleForm>
-      <label>
-        You can change the owner of the presentation, change the title, edit
-        slides, or create new ones.
-      </label>
-      <ReferenceInput label="User" source="userID" reference="users" validate={required} >
+      <ReferenceInput
+        label="User"
+        source="userID"
+        reference="users"
+        validate={required}
+      >
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <TextInput label="Title" source="title"  validate={required} />
+      <TextInput label="Title" source="title" validate={required} />
     </SimpleForm>
   </Edit>
 );
 
 export const PresentationsCreate = props => (
-  <Create {...props}>
+  <Create {...props}
+  title={
+    <div>
+      <div>Create Presentation</div>
+      <div style={{ fontSize: "14px" }}>Select a User and enter a title for your presentation</div>
+    </div>
+  }>
     <SimpleForm>
-      <label>Select a User and enter a title for your presentation.</label>
       <ReferenceInput
         label="User"
         source="userID"
@@ -122,8 +137,7 @@ export const PresentationsCreate = props => (
       >
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <TextInput label="Title" source="title"         validate={required}
- />
+      <TextInput label="Title" source="title" validate={required} />
     </SimpleForm>
   </Create>
 );

@@ -19,7 +19,8 @@ import {
   ReferenceField,
   ReferenceInput,
   NumberInput,
-  SelectInput
+  SelectInput,
+  minValue
 } from "admin-on-rest";
 
 import {
@@ -38,6 +39,8 @@ import UploadImageIcon from "material-ui/svg-icons/file/file-upload";
 
 import PropTypes from "prop-types";
 import get from "lodash.get";
+
+const positiveNumber = [minValue(1)];
 
 const styles = {
   list: {
@@ -195,7 +198,12 @@ const UploadImageButton = props => (
 );
 
 export const SlidesCreate = props => (
-  <Create {...props}>
+  <Create {...props} title={
+    <div>
+      <div>Create Slide</div>
+      <div style={{ fontSize: "14px" }}>Select the presentation and set the order in which the slide will be displayed</div>
+    </div>
+  }>
     <SimpleForm>
       <ReferenceInput
         label="Presentation"
@@ -204,10 +212,10 @@ export const SlidesCreate = props => (
         allowEmpty
         validate={required}
       >
-        <SelectInput optionText="title" validate={required} />
+        <SelectInput optionText="title" validate={required}/>
       </ReferenceInput>
-      <NumberInput label="Order" source="order" />
-      <TextInput label="Title" source="title" />
+      <NumberInput label="Order" source="order" validate={positiveNumber}/>
+      <TextInput label="Title" source="title"/>
       <TextInput label="Slide Caption" source="caption" />
       <ReferenceInput
         label="Select Background Image"
@@ -243,7 +251,12 @@ export const SlidesCreate = props => (
 const optionRenderer = props => `mike ${props}`;
 
 export const SlidesEdit = props => (
-  <Edit {...props}>
+  <Edit {...props} title={
+    <div>
+      <div>Edit Slide</div>
+      <div style={{ fontSize: "14px" }}>You can edit any of the fields or move the slide to another presentation</div>
+    </div>
+  }>
     <SimpleForm>
       <ReferenceInput
         label="Presentation"
@@ -254,7 +267,7 @@ export const SlidesEdit = props => (
       >
         <SelectInput optionText="title" validate={required} />
       </ReferenceInput>
-      <NumberInput label="Order" source="order" />
+      <NumberInput label="Order" source="order" validate={positiveNumber}/>
       <LongTextInput label="Title" source="title" />
       <LongTextInput label="Slide Caption" source="caption" />
       <ReferenceInput
@@ -372,7 +385,12 @@ SlideGrid.defaultProps = {
 
 export const SlidesList = props => (
   <List
-    title="Slides"
+    title={
+      <div>
+        <div>Slides</div>
+        <div style={{ fontSize: "14px" }}>You can either create new slides or edit existing ones</div>
+      </div>
+    }
     {...props}
     filters={<SlidesFilter />}
     sort={{ field: "order", order: "ASC" }}
