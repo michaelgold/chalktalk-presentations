@@ -49,7 +49,7 @@ export const ImagesCreate = props => (
 export const ImagesEdit = props => (
   <Edit {...props}>
     <SimpleForm>
-      <TextInput label="Title" source="title" />
+      <TextInput label="Title" source="title" validate={required} />
       <ImageInput source="pictures" label="Related pictures" accept="image/*">
         <ImageField source="src" title="title" />
       </ImageInput>
@@ -57,10 +57,9 @@ export const ImagesEdit = props => (
   </Edit>
 );
 
-const ImagesFilter = (props) => (
+const ImagesFilter = props => (
   <Filter {...props}>
-<TextInput label="Search" source="$search" alwaysOn />
-
+    <TextInput label="Search" source="$search" alwaysOn />
   </Filter>
 );
 
