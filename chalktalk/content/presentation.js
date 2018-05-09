@@ -1,5 +1,6 @@
 var imageSequence = [];
-
+var slides = [];
+var images = [];
 
 function getParam(name) {
   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -10,22 +11,55 @@ function getParam(name) {
   else return results[1];
 }
 
-
 var presentationID = getParam("play");
-let presentationURL = apiHost +
+let presentationURL =
+  apiHost +
   "/slides?presentation_id=" +
   presentationID +
   "&$limit=100&$sort[order]=1";
 
 $.ajax({
   url: presentationURL
-}).then(function(result) {
-  //work with data.item
+})
+  .then(function(result) {
+    //work with data.item
 
+    //console.log(result);
+    data = result.data;
+    for (var key in data) {
+      window.slides.push(data[key]);
+    }
+    //console.log(data);
+    for (var key in data) {
+      if (data.hasOwnProperty(key)) {
+        let image = data[key]["image_id"];
+        if (image != null) {
+          let ajaxUrl = apiHost + "/images?_id=" + image;
+          $.ajax({
+            url: ajaxUrl
+          }).then(function(result) {
+            //console.log(result.data);
+            for (var key in result.data) {
+              id = result.data[key]["_id"];
+              data = result.data[0]["pictures"][0]["src"];
+              window.images[id] = data;
+              console.log(window.images);
+            }
+          }).done(function(){
+            updateImageSequence();
+          });
+        }
+      }
+    }
+  })
+
+function updateImageSequence() {
+  console.log("updatating imagesequence");
+  window.imageSequence = [];
   //console.log(result);
-  data = result.data;
+  data = window.slides;
+
   //console.log(data);
-  var keys = [];
   var slides = [];
   for (var key in data) {
     if (data.hasOwnProperty(key)) {
@@ -46,25 +80,15 @@ $.ajax({
         slide = "title:" + slideText;
         window.imageSequence.push(slide);
       } else {
-        let ajaxUrl = apiHost + "/images?_id=" + image;
-        $.ajax({
-          url: ajaxUrl
-        })
-          .then(function(result) {
-            imageData = result.data[0]["pictures"][0]["src"];
-            slide =
-              slideText == null
-                ? imageData
-                : "caption:" + slideText + ";" + imageData;
-          })
-          .then(function(result) {
-            window.imageSequence.push(slide);
-          });
+        imageData = window.images[image];
+        slide =
+          slideText == null
+            ? imageData
+            : "caption:" + slideText + ";" + imageData;
+        window.imageSequence.push(slide);
       }
     }
   }
-  return slides;
-});
+}
 
-console.log(imageSequence);
 //console.log(result);
