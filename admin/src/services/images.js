@@ -31,7 +31,12 @@ import {
 } from "material-ui/Card";
 
 export const ImagesCreate = props => (
-  <Create {...props} title="Upload Image">
+  <Create {...props} title={
+    <div>
+      <div>Upload Image</div>
+      <div style={{ fontSize: "14px" }}>Select the title and upload the image</div>
+    </div>
+  }>
     <SimpleForm>
       <TextInput label="Title" source="title" validate={required} />
       <ImageInput
@@ -47,7 +52,12 @@ export const ImagesCreate = props => (
 );
 
 export const ImagesEdit = props => (
-  <Edit {...props}>
+  <Edit {...props} title={
+    <div>
+      <div>Edit Image</div>
+      <div style={{ fontSize: "14px" }}>You can change the title or upload a new image</div>
+    </div>
+  }>
     <SimpleForm>
       <TextInput label="Title" source="title" validate={required} />
       <ImageInput source="pictures" label="Related pictures" accept="image/*">
@@ -65,6 +75,12 @@ const ImagesFilter = props => (
 
 export const ImagesList = props => (
   <List
+  title={
+    <div>
+      <div>Images List</div>
+      <div style={{ fontSize: "14px" }}>You can either upload new images or edit existing ones</div>
+    </div>
+  }
     {...props}
     filters={<ImagesFilter />}
     sort={{ field: "title", order: "ASC" }}
